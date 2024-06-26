@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Upload e Particionar CSV</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #f8f9fa;
+        padding-top: 50px;
+      }
+      .container {
+        max-width: 600px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        margin-bottom: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center">Upload e Particionar Arquivo CSV</h1>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="file">Escolha o arquivo CSV para fazer upload</label>
+          <input type="file" name="file" id="file" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="num_lines">Número de linhas por partição</label>
+          <select name="num_lines" id="num_lines" class="form-control" required>
+            <option value="100000">100.000</option>
+            <option value="200000">200.000</option>
+            <option value="300000">300.000</option>
+            <option value="custom">Customizado</option>
+          </select>
+          <input type="number" name="custom_num_lines" id="custom_num_lines" class="form-control mt-2" placeholder="Digite o número de linhas personalizado" min="1" style="display: none;">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Upload</button>
+      </form>
+    </div>
+
+    <!-- Bootstrap JS e dependências -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document.getElementById('num_lines').addEventListener('change', function () {
+        if (this.value === 'custom') {
+          document.getElementById('custom_num_lines').style.display = 'block';
+          document.getElementById('custom_num_lines').required = true;
+        } else {
+          document.getElementById('custom_num_lines').style.display = 'none';
+          document.getElementById('custom_num_lines').required = false;
+        }
+      });
+    </script>
+  </body>
+</html>
